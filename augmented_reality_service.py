@@ -1,7 +1,14 @@
+from json_parser import JsonReader
 
 class AugmentedRealityService:
 
+    json_reader = None
+
     def __init__(self):
+        self.json_reader = JsonReader()
+
+
+    def set_service_parameter_json(self,path):
         pass
 
     def set_calibration_obj(self, calib_obj):

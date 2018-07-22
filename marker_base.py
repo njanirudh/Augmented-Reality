@@ -7,5 +7,5 @@ class MarkerBase(ABC):
         pass
 
     @abstractmethod
-    def set_marker_parameters(self,params):
+    def set_json_parameters(self,params):
         pass

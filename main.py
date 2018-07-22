@@ -3,5 +3,9 @@ from augmented_reality_service import AugmentedRealityService
 from camera_calibration import CameraCalibration
 
 if __name__ == "__main__":
-    pass
+
+    ar_service = AugmentedRealityService()
+
+    ar_service.set_service_parameter_json("data/params.json")
+    ar_service.run_service()
 

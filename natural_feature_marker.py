@@ -8,9 +8,9 @@ class NaturalFeatureMarker(MarkerBase):
     def set_marker_file(self,path):
         pass
 
-    def set_marker_parameters(self,params):
+    def set_json_parameters(self,params):
         pass
 
 if __name__ == "__main__":
-    marker = ArucoMarker()
+    marker = NaturalFeatureMarker()
 

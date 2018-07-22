@@ -1,5 +1,9 @@
 {
   "marker_type" : "aruco",
-  "features"    : "ORB",
-  "feature_count": 500
+  "marker_path" : "path" ,
+  "marker_debug_draw" : true,
+  "marker_params" :{
+
+  }
+
 }
