@@ -1,0 +1,5 @@
+{
+  "marker_type" : "aruco",
+  "features"    : "ORB",
+  "feature_count": 500
+}
