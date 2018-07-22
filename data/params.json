@@ -1,6 +1,6 @@
 {
   "marker_type" : "aruco",
-  "marker_path" : "path" ,
+  "marker_path" : "" ,
   "marker_debug_draw" : true,
   "marker_params" :{
 

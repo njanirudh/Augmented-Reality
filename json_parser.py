@@ -1,7 +1,23 @@
 import json
+from singleton import Singleton
 from pprint import pprint
 
-class JsonReader:
+
+class ArucoJsonObj:
+    pass
+
+class NFTJsonObj:
+    pass
+
+class JsonObj:
+    marker_type = ""
+    marker_path = ""
+    marker_debug_draw = True
+    marker_params = None
+
+
+
+class JsonReader(Singleton):
 
     json_data = None
 
@@ -12,6 +28,7 @@ class JsonReader:
 
         with open(path , encoding='utf-8') as f:
             self.json_data = json.load(f)
+
 
     def print_json(self):
         pprint(self.json_data)
