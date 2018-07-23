@@ -3,20 +3,6 @@ from singleton import Singleton
 from pprint import pprint
 
 
-class ArucoJsonObj:
-    pass
-
-class NFTJsonObj:
-    pass
-
-class JsonObj:
-    marker_type = ""
-    marker_path = ""
-    marker_debug_draw = True
-    marker_params = None
-
-
-
 class JsonReader(Singleton):
 
     json_data = None

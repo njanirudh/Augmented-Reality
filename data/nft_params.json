@@ -1,0 +1,8 @@
+{
+  "marker_type" : "nft",
+  "marker_params" :{
+    "debug_draw" : true,
+    "max_features" : 500
+  }
+
+}
