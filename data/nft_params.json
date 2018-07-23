@@ -5,6 +5,7 @@
   "marker_params" :{
     "marker_path" : "/home/nj/Pictures/ar_chips.jpg",
     "feature_type" : "ORB",
+    "matcher_type" : "knn",
     "debug_draw" : true,
     "max_features" : 500
   }
