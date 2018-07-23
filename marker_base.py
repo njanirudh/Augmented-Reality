@@ -11,5 +11,9 @@ class MarkerBase(ABC):
         pass
 
     @abstractmethod
-    def set_output_image(self, output):
+    def process_image(self):
+        pass
+
+    @abstractmethod
+    def get_output_image(self):
         pass

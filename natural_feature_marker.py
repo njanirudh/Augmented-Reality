@@ -1,18 +1,25 @@
+import cv2
+
 from marker_base import MarkerBase
 
 class NaturalFeatureMarker(MarkerBase):
 
+    in_image = None
+
     def __init__(self):
         pass
 
-    def set_json_parameters(self,params):
+    def set_json_parameters(self, params):
+        pass
+
+    def process_image(self):
         pass
 
     def set_input_image(self, input):
-        pass
+        self.in_image = cv2.cvtColor(input, cv2.COLOR_RGB2GRAY)
 
-    def set_output_image(self, output):
-        pass
+    def get_output_image(self):
+        return self.in_image
 
 if __name__ == "__main__":
     marker = NaturalFeatureMarker()

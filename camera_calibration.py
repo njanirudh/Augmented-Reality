@@ -15,7 +15,7 @@ class CameraCalibration:
         self.default_dist_mat = cv_file.getNode("dist_coeff").mat()
 
     def get_default_calibration(self):
-        pass
+        return self.default_camera_mat , self.default_dist_mat
 
     def calibrate_camera(self,path):
         pass

@@ -1,4 +1,5 @@
 {
+  "calibration_path" : "",
   "marker_type" : "aruco",
   "marker_params" :{
     "debug_draw" : true

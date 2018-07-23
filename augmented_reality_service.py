@@ -1,4 +1,5 @@
 from json_parser import JsonReader
+from camera_calibration import CameraCalibration
 
 from aruco_marker import ArucoMarker
 from natural_feature_marker import NaturalFeatureMarker
@@ -16,6 +17,7 @@ class AugmentedRealityService:
         self.json_reader = JsonReader()
         self.camera = cv2.VideoCapture(0)
 
+
     def set_service_parameter_json(self,path):
         self.json_reader.read_from_file(path)
 
@@ -23,9 +25,9 @@ class AugmentedRealityService:
         self.set_marker(marker_type)
 
 
-
     def set_calibration(self,type):
         pass
+
 
     def set_marker(self,type):
 
@@ -41,7 +43,10 @@ class AugmentedRealityService:
 
 
     def process_image(self, frame):
-        pass
+        self.marker_obj.set_input_image(frame)
+        self.marker_obj.process_image()
+
+        return  self.marker_obj.get_output_image()
 
 
     def run_service(self):
@@ -51,9 +56,9 @@ class AugmentedRealityService:
         while True:
             ret, frame = self.camera.read()
 
-            self.process_image(frame)
+            output = self.process_image(frame)
 
-            cv2.imshow('AR', frame)
+            cv2.imshow('AR', output)
 
             c = cv2.waitKey(30)
             if c == 27:
