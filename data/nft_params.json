@@ -1,7 +1,10 @@
 {
-  "calibration_path" : "",
+  "calibration_path" : "data/calibration.yaml",
   "marker_type" : "nft",
+
   "marker_params" :{
+    "marker_path" : "/home/nj/Pictures/ar_chips.jpg",
+    "feature_type" : "ORB",
     "debug_draw" : true,
     "max_features" : 500
   }
