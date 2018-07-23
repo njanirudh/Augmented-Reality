@@ -46,6 +46,18 @@ class NaturalFeatureMarker(MarkerBase):
         self.cam_mat = cam_mat
         self.dist_mat = dist_mat
 
+
+    def set_marker_image(self,path):
+        self.marker_image = cv2.imread(path)
+        self.marker_image = cv2.resize(self.marker_image , (0,0), fx=0.5, fy=0.5)
+        self.marker_kp , self.marker_desc = self.feature_detector.detectAndCompute(self.marker_image,None)
+
+
+    def set_input_image(self, input):
+        self.in_image = input
+        self.input_kp , self.input_desc = self.feature_detector.detectAndCompute(input,None)
+
+
     def process_image(self):
         if (self.json_params["matcher_type"] == "knn"):
             self.run_bf_matcher()
@@ -55,13 +67,15 @@ class NaturalFeatureMarker(MarkerBase):
 
     def run_bf_matcher(self):
         # BFMatcher with default params
-        bf = cv2.BFMatcher()
+        bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=False)
         matches = bf.knnMatch(self.marker_desc, self.input_desc, k=2)
+
         # Apply ratio test
         good = []
         for m, n in matches:
             if m.distance < 0.75 * n.distance:
                 good.append([m])
+
 
         if (self.json_params["debug_draw"] == True):
             # cv2.drawMatchesKnn expects list of lists as matches.
@@ -91,14 +105,6 @@ class NaturalFeatureMarker(MarkerBase):
             self.in_image = cv2.drawMatchesKnn(self.marker_image, self.marker_kp,
                                            self.in_image, self.input_kp, matches,self.in_image, **draw_params)
 
-    def set_marker_image(self,path):
-        self.marker_image = cv2.imread(path)
-        self.marker_image = cv2.resize(self.marker_image , (0,0), fx=0.5, fy=0.5)
-        self.marker_kp , self.marker_desc = self.feature_detector.detectAndCompute(self.marker_image,None)
-
-    def set_input_image(self, input):
-        self.in_image = input
-        self.input_kp , self.input_desc = self.feature_detector.detectAndCompute(input,None)
 
     def get_output_image(self):
         return self.in_image
