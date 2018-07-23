@@ -11,6 +11,8 @@ class ArucoMarker(MarkerBase):
     aruco_dict = None
     parameters = None
 
+    json_params = None
+
     cam_mat = None
     dist_mat = None
 
@@ -24,7 +26,7 @@ class ArucoMarker(MarkerBase):
         self.parameters = aruco.DetectorParameters_create()
 
     def set_json_parameters(self,params):
-        pass
+        self.json_params = params
 
     def set_calib_parameters(self,cam_mat,dist_mat):
         self.cam_mat = cam_mat
@@ -42,10 +44,11 @@ class ArucoMarker(MarkerBase):
             self.r_vec, self.t_vec, _ = aruco.estimatePoseSingleMarkers(corners[0], 0.05, self.cam_mat,
                                                             self.dist_mat)
 
-            aruco.drawAxis(self.in_image,  self.cam_mat, self.dist_mat,  self.r_vec[0], self.t_vec[0], 0.1)  # Draw Axis
-            aruco.drawDetectedMarkers(self.in_image, corners)  # Draw A square around the markers
+            if(self.json_params["debug_draw"] == True ):
+                aruco.drawAxis(self.in_image,  self.cam_mat, self.dist_mat,  self.r_vec[0], self.t_vec[0], 0.1)  # Draw Axis
+                aruco.drawDetectedMarkers(self.in_image, corners)  # Draw A square around the markers
 
-            cv2.putText(self.in_image, "Id: " + str(ids), (0, 64), self.font, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                cv2.putText(self.in_image, "Id: " + str(ids), (0, 64), self.font, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
 
     def set_input_image(self, input):
