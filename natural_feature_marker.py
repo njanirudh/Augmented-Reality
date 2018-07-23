@@ -12,6 +12,9 @@ class NaturalFeatureMarker(MarkerBase):
     def set_json_parameters(self, params):
         pass
 
+    def set_calib_parameters(self,cam_mat,dist_mat):
+        pass
+
     def process_image(self):
         pass
 

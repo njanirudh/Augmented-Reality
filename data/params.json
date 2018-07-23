@@ -1,5 +1,5 @@
 {
-  "calibration_path" : "",
+  "calibration_path" : "data/calibration.yaml",
   "marker_type" : "aruco",
   "marker_params" :{
     "debug_draw" : true

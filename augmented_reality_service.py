@@ -12,21 +12,22 @@ class AugmentedRealityService:
     camera = None
 
     marker_obj = None
+    camera_calib = None
 
     def __init__(self):
         self.json_reader = JsonReader()
+        self.camera_calib = CameraCalibration()
         self.camera = cv2.VideoCapture(0)
 
 
     def set_service_parameter_json(self,path):
         self.json_reader.read_from_file(path)
 
+        calib_path = self.json_reader.get_value("calibration_path")
+        self.camera_calib.get_calibration_from_file(calib_path)
+
         marker_type = self.json_reader.get_value("marker_type")
         self.set_marker(marker_type)
-
-
-    def set_calibration(self,type):
-        pass
 
 
     def set_marker(self,type):
@@ -40,6 +41,8 @@ class AugmentedRealityService:
             self.marker_obj = NaturalFeatureMarker()
 
         self.marker_obj.set_json_parameters(marker_params)
+        self.marker_obj.set_calib_parameters(self.camera_calib.camera_matrix,
+                                             self.camera_calib.dist_matrix)
 
 
     def process_image(self, frame):

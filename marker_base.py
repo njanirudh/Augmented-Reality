@@ -11,9 +11,17 @@ class MarkerBase(ABC):
         pass
 
     @abstractmethod
+    def set_calib_parameters(self,cam_mat,dist_mat):
+        pass
+
+    @abstractmethod
     def process_image(self):
         pass
 
     @abstractmethod
     def get_output_image(self):
+        pass
+
+    @abstractmethod
+    def get_pose(self):
         pass
