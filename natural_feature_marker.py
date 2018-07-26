@@ -1,7 +1,10 @@
 import cv2
 import numpy as np
+import cv2.aruco as aruco
 
 from marker_base import MarkerBase
+
+MIN_MATCH_COUNT = 10
 
 class NaturalFeatureMarker(MarkerBase):
 
@@ -76,7 +79,6 @@ class NaturalFeatureMarker(MarkerBase):
             if m.distance < 0.75 * n.distance:
                 good.append([m])
 
-
         if (self.json_params["debug_draw"] == True):
             # cv2.drawMatchesKnn expects list of lists as matches.
             self.in_image = cv2.drawMatchesKnn(self.marker_image, self.marker_kp,
@@ -85,25 +87,49 @@ class NaturalFeatureMarker(MarkerBase):
     def run_flann_matcher(self):
 
         # FLANN parameters
-        FLANN_INDEX_KDTREE = 2
+        FLANN_INDEX_KDTREE = 0
         index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
         search_params = dict(checks=50)  # or pass empty dictionary
         flann = cv2.FlannBasedMatcher(index_params, search_params)
+
         matches = flann.knnMatch(np.asarray(self.marker_desc,np.float32), np.asarray(self.input_desc,np.float32), k=2)
         # Need to draw only good matches, so create a mask
         matchesMask = [[0, 0] for i in range(len(matches))]
-        # ratio test as per Lowe's paper
-        for i, (m, n) in enumerate(matches):
+
+        # store all the good matches as per Lowe's ratio test.
+        good = []
+        for m, n in matches:
             if m.distance < 0.7 * n.distance:
-                matchesMask[i] = [1, 0]
+                good.append(m)
+
+        if len(good) > MIN_MATCH_COUNT:
+            src_pts = np.float32([self.marker_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+            dst_pts = np.float32([self.input_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+
+            M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
+            matchesMask = mask.ravel().tolist()
+
+            h, w ,_ = self.in_image.shape
+            pts = np.float32([[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]).reshape(-1, 1, 2)
+            dst = cv2.perspectiveTransform(pts, M)
+
+            self.in_image = cv2.polylines(self.in_image, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
+
+            num, Rs, Ts, Ns = cv2.decomposeHomographyMat(M,self.cam_mat)
+
+            aruco.drawAxis(self.in_image, self.cam_mat, self.dist_mat, Rs[0], Ts[0], 0.1)  # Draw Axis
+
+
+        else:
+            matchesMask = None
 
         if (self.json_params["debug_draw"] == True):
             draw_params = dict(matchColor=(0, 255, 0),
                            singlePointColor=(255, 0, 0),
                            matchesMask=matchesMask,
                            flags=0)
-            self.in_image = cv2.drawMatchesKnn(self.marker_image, self.marker_kp,
-                                           self.in_image, self.input_kp, matches,self.in_image, **draw_params)
+            #self.in_image = cv2.drawMatchesKnn(self.marker_image, self.marker_kp,
+            #                               self.in_image, self.input_kp, matches,self.in_image, **draw_params)
 
 
     def get_output_image(self):

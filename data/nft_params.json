@@ -3,10 +3,14 @@
   "marker_type" : "nft",
 
   "marker_params" :{
-    "marker_path" : "/home/nj/Pictures/ar_chips.jpg",
+    "marker_path" : "/home/nj/Pictures/Augmented Reality/stones.jpg",
     "feature_type" : "ORB",
-    "matcher_type" : "knn",
+    "matcher_type" : "flann",
     "debug_draw" : true
+  },
+
+  "3d_object" : {
+    "obj_path" : ""
   }
 
 }
