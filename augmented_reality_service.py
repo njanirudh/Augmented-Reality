@@ -48,6 +48,7 @@ class AugmentedRealityService:
     def process_image(self, frame):
         self.marker_obj.set_input_image(frame)
         self.marker_obj.process_image()
+        self.marker_obj.get_pose()
 
         return  self.marker_obj.get_output_image()
 

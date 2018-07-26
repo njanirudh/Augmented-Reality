@@ -5,7 +5,7 @@
   "marker_params" :{
     "marker_path" : "/home/nj/Pictures/Augmented Reality/stones.jpg",
     "feature_type" : "ORB",
-    "matcher_type" : "flann",
+    "matcher_type" : "bfm",
     "debug_draw" : true
   },
 
