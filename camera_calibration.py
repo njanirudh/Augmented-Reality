@@ -1,5 +1,6 @@
 import cv2
 
+# Class to read calibration matrix from file
 class CameraCalibration:
 
     camera_matrix = None

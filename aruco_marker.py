@@ -4,6 +4,7 @@ import cv2.aruco as aruco
 
 from marker_base import MarkerBase
 
+
 class ArucoMarker(MarkerBase):
 
     in_image = None

@@ -4,7 +4,7 @@ import cv2.aruco as aruco
 
 from marker_base import MarkerBase
 
-MIN_MATCH_COUNT = 10
+MIN_MATCH_COUNT = 20
 
 class NaturalFeatureMarker(MarkerBase):
 
@@ -35,9 +35,6 @@ class NaturalFeatureMarker(MarkerBase):
 
         if(self.json_params["feature_type"] == "ORB"):
             self.feature_detector = cv2.ORB_create()
-
-        if (self.json_params["feature_type"] == "FAST"):
-            self.feature_detector = cv2.FastFeatureDetector_create()
 
         if (self.json_params["feature_type"] == "AKAZE"):
             self.feature_detector = cv2.AKAZE_create()
