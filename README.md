@@ -2,11 +2,18 @@
 
 # Augmented-Reality
 
-Augmented reality application using Opencv and OpenGL in python.
+Augmented reality application using OpenCV and OpenGL in python.
 
 ## Introduction
 
 Augmented Reality is a view of of the physical, real world environment that is augmented by synthetic computer-generated elements.
+
+## Installation / Usage
+
+* Clone the git repo
+* Install the modules    
+        __pip install -r requirements.txt__
+* Run __main.py__ (Default values)
 
 ## Architecture
 
@@ -61,13 +68,6 @@ The paths to the calibration file and marker can be changed
     
         }
 
-
-## Installation / Usage
-
-* Clone the git repo
-* Install the modules    
-        __pip install -r requirements.txt__
-* Run __main.py__ (Default values)
 
 ## Authors
 

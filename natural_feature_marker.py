@@ -49,7 +49,7 @@ class NaturalFeatureMarker(MarkerBase):
 
     def set_marker_image(self,path):
         self.marker_image = cv2.imread(path)
-        self.marker_image = cv2.resize(self.marker_image , (0,0), fx=0.5, fy=0.5)
+        self.marker_image = cv2.resize(self.marker_image , (640,480), fx=1.0, fy=1.0)
         self.marker_kp , self.marker_desc = self.feature_detector.detectAndCompute(self.marker_image,None)
 
 
@@ -120,6 +120,7 @@ class NaturalFeatureMarker(MarkerBase):
             dst_pts = np.float32([self.input_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
 
             H, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
+
             matchesMask = mask.ravel().tolist()
 
             h, w ,_ = self.in_image.shape
@@ -130,7 +131,7 @@ class NaturalFeatureMarker(MarkerBase):
 
             if (self.json_params["debug_draw"] == True):
 
-                aruco.drawAxis(self.in_image, self.cam_mat, self.dist_mat, self.r_vec[0], self.t_vec[0],
+                aruco.drawAxis(self.in_image, self.cam_mat, self.dist_mat, self.r_vec[1], self.t_vec[1],
                                0.1)  # Draw Axis
                 self.in_image = cv2.polylines(self.in_image, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
 
