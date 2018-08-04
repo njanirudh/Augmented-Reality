@@ -63,7 +63,7 @@ The paths to the calibration file and marker can be changed
 * Clone the git repo
 * Install the modules    
         __pip install -r requirements.txt__
-* Run 'main.py' (Default values)
+* Run __main.py__ (Default values)
 
 ## Authors
 
