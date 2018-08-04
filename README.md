@@ -12,7 +12,7 @@ Augmented Reality is a view of of the physical, real world environment that is a
 
 Depending on the JSON parameters the application will be able to detect 'Aruco' or 'NFT' markers.
 
-<img src="https://github.com/njanirudh/Augmented-Reality/blob/master/assets/architecture.png" width="600">    
+<img src="https://github.com/njanirudh/Augmented-Reality/blob/master/assets/architecture.png" width="1000">    
 
 
 ### Input JSON  
