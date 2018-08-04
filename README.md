@@ -11,6 +11,7 @@ Augmented Reality is a view of of the physical, real world environment that is a
 
 ## Architecture
 
+<img src="https://github.com/njanirudh/Augmented-Reality/blob/master/assets/architecture.png" width="600">    
 
 
 ### Classes
@@ -21,6 +22,8 @@ Augmented Reality is a view of of the physical, real world environment that is a
 
 There are two seperate types of JSON depending on the type of marker that is tracked.
 The example parameter JSON files are placed in the data folder.
+
+The paths to the calibration file and marker can be changed  
 
 * __NFT marker__  (nft_params.json)
         
