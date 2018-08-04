@@ -30,8 +30,8 @@ The example parameter JSON files are placed in the data folder.
           "marker_type" : "nft",    
           "marker_params" :{      
             "marker_path" : "assets/stones.jpg",    
-            "feature_type" : "ORB",         
-            "matcher_type" : "flann",      
+            "feature_type" : "ORB",                  // ORB , AKAZE
+            "matcher_type" : "flann",                // flann , bfm
             "debug_draw" : true    
           },
         
@@ -60,9 +60,18 @@ The example parameter JSON files are placed in the data folder.
 
 ## Installation / Usage
 
+* Clone the git repo
+* Install the modules    
+        pip install -r requirements.txt
+* Run 'main.py' (Default values)
 
+## Authors
 
-## References
+* **N J Anirudh** - *Initial work* - [njanirudh](https://github.com/njanirudh)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 
 
