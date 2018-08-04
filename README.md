@@ -4,24 +4,21 @@
 
 Augmented reality application using Opencv and OpenGL in python.
 
-
 ## Introduction
 
 Augmented Reality is a view of of the physical, real world environment that is augmented by synthetic computer-generated elements.
 
 ## Architecture
 
+Depending on the JSON parameters the application will be able to detect 'Aruco' or 'NFT' markers.
+
 <img src="https://github.com/njanirudh/Augmented-Reality/blob/master/assets/architecture.png" width="600">    
-
-
-### Classes
-
 
 
 ### Input JSON  
 
 There are two seperate types of JSON depending on the type of marker that is tracked.
-The example parameter JSON files are placed in the data folder.
+The default parameter JSON files are placed in the data folder.
 
 The paths to the calibration file and marker can be changed  
 
@@ -65,7 +62,7 @@ The paths to the calibration file and marker can be changed
 
 * Clone the git repo
 * Install the modules    
-        pip install -r requirements.txt
+        __pip install -r requirements.txt__
 * Run 'main.py' (Default values)
 
 ## Authors
