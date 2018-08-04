@@ -10,8 +10,12 @@ Augmented Reality is a view of of the physical, real world environment that is a
 
 ## Architecture
 
+* Basic application process blocks
+<img src="https://github.com/njanirudh/Augmented-Reality/blob/master/assets/process.png" width="1000">    
+
 Depending on the JSON parameters the application will be able to detect 'Aruco' or 'NFT' markers.
 
+* Marker detection process
 <img src="https://github.com/njanirudh/Augmented-Reality/blob/master/assets/architecture.png" width="1000">    
 
 
