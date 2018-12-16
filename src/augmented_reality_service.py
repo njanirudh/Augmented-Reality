@@ -8,22 +8,25 @@ import cv2
 
 
 class AugmentedRealityService:
+    """
+    """
 
-    json_reader = None
-    camera = None
-
-    marker_obj = None
-    camera_calib = None
-
-    # Initializing the JSON-Reader , Camera Calibration , Webcam
     def __init__(self):
+        """
+
+        """
         self.json_reader = JsonReader()
         self.camera_calib = CameraCalibration()
         self.camera = cv2.VideoCapture(0)
+        self.marker_obj = None
 
 
-    # Sets the json file path and read the required value
     def set_service_parameter_json(self,path):
+        """
+        Sets the json file path and read the required value
+        :param path:
+        :return:
+        """
         self.json_reader.read_from_file(path)
 
         calib_path = self.json_reader.get_value("calibration_path")
@@ -33,8 +36,12 @@ class AugmentedRealityService:
         self.set_marker(marker_type)
 
 
-    # Creates a marker object depending on the json input
     def set_marker(self,type):
+        """
+        Creates a marker object depending on the json input
+        :param type:
+        :return:
+        """
 
         marker_params = self.json_reader.get_value("marker_params")
 
@@ -50,8 +57,12 @@ class AugmentedRealityService:
 
 
 
-    # Function that runs to process each frame.
     def process_image(self, frame):
+        """
+        Function that runs to process each frame.
+        :param frame:
+        :return:
+        """
         self.marker_obj.set_input_image(frame)
         self.marker_obj.process_image()
         self.marker_obj.get_pose()
@@ -59,9 +70,11 @@ class AugmentedRealityService:
         return  self.marker_obj.get_output_image()
 
 
-
-    # Function is called once
     def run_service(self):
+        """
+
+        :return:
+        """
         if not self.camera.isOpened():
             raise IOError("Cannot open webcam !")
 
