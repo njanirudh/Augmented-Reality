@@ -67,8 +67,6 @@ class AugmentedRealityService:
         self.marker_obj.process_image()
         self.marker_obj.get_pose()
 
-        return  self.marker_obj.get_output_image()
-
 
     def run_service(self):
         """
@@ -88,4 +86,11 @@ class AugmentedRealityService:
             c = cv2.waitKey(30)
             if c == 27:
                 break
+
+    def get_output(self):
+        """
+
+        :return:
+        """
+        return self.marker_obj.get_output_image()
 
