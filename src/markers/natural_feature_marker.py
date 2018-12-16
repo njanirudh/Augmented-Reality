@@ -8,27 +8,25 @@ MIN_MATCH_COUNT = 20
 
 class NaturalFeatureMarker(MarkerBase):
 
-    in_image = None
-    marker_image = None
-
-    json_params = None
-
-    cam_mat = None
-    dist_mat = None
-
-    r_vec = None
-    t_vec = None
-
-    feature_detector = None
-
-    marker_kp = None
-    marker_desc = None
-
-    input_kp = None
-    input_desc = None
-
     def __init__(self):
-        pass
+        self.in_image = None
+        self.marker_image = None
+
+        self.json_params = None
+
+        self.cam_mat = None
+        self.dist_mat = None
+
+        self.r_vec = None
+        self.t_vec = None
+
+        self.feature_detector = None
+
+        self.marker_kp = None
+        self.marker_desc = None
+
+        self.input_kp = None
+        self.input_desc = None
 
     def set_json_parameters(self, params):
         self.json_params = params
