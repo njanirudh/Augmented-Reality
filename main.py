@@ -7,4 +7,5 @@ if __name__ == "__main__":
     ar_service = AugmentedRealityService()
     ar_service.set_service_parameter_json("data/aruco_params.json")
     ar_service.run_service()
+    ar_service.get_output()
 

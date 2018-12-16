@@ -3,7 +3,7 @@
   "marker_type" : "nft",
 
   "marker_params" :{
-    "marker_path" : "/home/nj/Pictures/Augmented Reality/stones.jpg",
+    "marker_path" : "./assets/stones.jpg",
     "feature_type" : "ORB",
     "matcher_type" : "flann",
     "debug_draw" : true

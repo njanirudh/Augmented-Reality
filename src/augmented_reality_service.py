@@ -79,7 +79,8 @@ class AugmentedRealityService:
         while True:
             ret, frame = self.camera.read()
 
-            output = self.process_image(frame)
+            self.process_image(frame)
+            output = self.get_output()
 
             cv2.imshow('AR', output)
 
