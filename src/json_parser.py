@@ -2,15 +2,21 @@ import json
 from src.singleton import Singleton
 from pprint import pprint
 
-# Basic class to read JSON file
 class JsonReader(Singleton):
+    """
 
-    json_data = None
+    """
 
     def __init__(self):
-        pass
+        self.json_data = None
+
 
     def read_from_file(self,path):
+        """
+
+        :param path:
+        :return:
+        """
 
         with open(path , encoding='utf-8') as f:
             self.json_data = json.load(f)

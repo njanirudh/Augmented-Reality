@@ -1,7 +1,9 @@
 import cv2
 
-# Class to read calibration matrix from file
 class CameraCalibration:
+    """
+    Class to read calibration matrix from file
+    """
 
     camera_matrix = None
     dist_matrix = None
@@ -10,9 +12,20 @@ class CameraCalibration:
         pass
 
     def calibrate_camera(self,path):
+        """
+
+        :param path:
+        :return:
+        """
         pass
 
     def get_calibration_from_file(self,path):
+        """
+
+        :param path:
+        :return:
+        """
+
         # FILE_STORAGE_READ
         cv_file = cv2.FileStorage(path, cv2.FILE_STORAGE_READ)
 
@@ -27,9 +40,17 @@ class CameraCalibration:
         cv_file.release()
 
     def get_camera_mat(self):
+        """
+
+        :return:
+        """
         return self.camera_matrix
 
     def get_dist_mat(self):
+        """
+
+        :return:
+        """
         return self.dist_matrix
 
 
