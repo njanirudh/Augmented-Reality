@@ -2,7 +2,7 @@
 
 # Augmented-Reality
 
-Augmented reality application using OpenCV and OpenGL in python. Aim of this project is to make a modular AR framework using python which woks on wide variety of markers and on which we can place wide variety of graphical elements.
+Augmented reality application using OpenCV and OpenGL in python. Aim of this project is to make a modular AR framework using python which works on wide variety of markers and on which we can place wide variety of graphical elements.
 
 ## Introduction
 
