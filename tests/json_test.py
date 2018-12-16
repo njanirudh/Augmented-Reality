@@ -1,4 +1,4 @@
-from json_parser import JsonReader
+from src.json_parser import JsonReader
 
 if __name__ == "__main__":
 

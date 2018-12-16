@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import cv2.aruco as aruco
 
-from marker_base import MarkerBase
+from src.marker_base import MarkerBase
 
 
 class ArucoMarker(MarkerBase):

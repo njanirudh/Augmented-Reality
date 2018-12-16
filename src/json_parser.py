@@ -1,5 +1,5 @@
 import json
-from singleton import Singleton
+from src.singleton import Singleton
 from pprint import pprint
 
 # Basic class to read JSON file
