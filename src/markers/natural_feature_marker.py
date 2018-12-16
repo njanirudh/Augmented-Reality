@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import cv2.aruco as aruco
 
-from src.marker_base import MarkerBase
+from src.markers.marker_base import MarkerBase
 
 MIN_MATCH_COUNT = 20
 

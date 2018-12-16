@@ -5,11 +5,9 @@ class CameraCalibration:
     Class to read calibration matrix from file
     """
 
-    camera_matrix = None
-    dist_matrix = None
-
     def __init__(self):
-        pass
+        self.camera_matrix = None
+        self.dist_matrix = None
 
     def calibrate_camera(self,path):
         """

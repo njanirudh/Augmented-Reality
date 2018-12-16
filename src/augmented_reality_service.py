@@ -1,8 +1,8 @@
 from src.json_parser import JsonReader
 from src.camera_calibration import CameraCalibration
 
-from src.aruco_marker import ArucoMarker
-from src.natural_feature_marker import NaturalFeatureMarker
+from src.markers.aruco_marker import ArucoMarker
+from src.markers.natural_feature_marker import NaturalFeatureMarker
 
 import cv2
 
