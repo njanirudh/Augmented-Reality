@@ -52,8 +52,8 @@ class AugmentedRealityService:
             self.__marker_obj = NaturalFeatureMarker()
 
         self.__marker_obj.set_json_parameters(marker_params)
-        self.__marker_obj.set_calib_parameters(self.__camera_calib.__camera_matrix,
-                                               self.__camera_calib.__dist_matrix)
+        self.__marker_obj.set_calib_parameters(self.__camera_calib.get_camera_mat(),
+                                               self.__camera_calib.get_dist_mat())
 
 
     def process_image(self, frame):

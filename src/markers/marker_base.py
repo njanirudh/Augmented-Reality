@@ -5,6 +5,8 @@ class MarkerBase(ABC):
     All types of markers must have
     the following class signature
     """
+    def __init__(self):
+        pass
 
     @abstractmethod
     def set_input_image(self, input):

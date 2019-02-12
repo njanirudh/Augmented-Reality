@@ -9,64 +9,65 @@ MIN_MATCH_COUNT = 20
 class NaturalFeatureMarker(MarkerBase):
 
     def __init__(self):
-        self.in_image = None
-        self.marker_image = None
+        super().__init__()
 
-        self.json_params = None
+        self.__in_image = None
+        self.__json_params = None
 
-        self.cam_mat = None
-        self.dist_mat = None
+        self.__cam_mat = None
+        self.__dist_mat = None
 
-        self.r_vec = None
-        self.t_vec = None
+        self.__r_vec = None
+        self.__t_vec = None
 
-        self.feature_detector = None
+        self.__marker_image = None
+        self.__feature_detector = None
 
-        self.marker_kp = None
-        self.marker_desc = None
+        self.__marker_kp = None
+        self.__marker_desc = None
 
-        self.input_kp = None
-        self.input_desc = None
+        self.__input_kp = None
+        self.__input_desc = None
 
     def set_json_parameters(self, params):
-        self.json_params = params
+        self.__json_params = params
 
-        if(self.json_params["feature_type"] == "ORB"):
-            self.feature_detector = cv2.ORB_create()
+        if(self.__json_params["feature_type"] == "ORB"):
+            self.__feature_detector = cv2.ORB_create()
 
-        if (self.json_params["feature_type"] == "AKAZE"):
-            self.feature_detector = cv2.AKAZE_create()
+        if (self.__json_params["feature_type"] == "AKAZE"):
+            self.__feature_detector = cv2.AKAZE_create()
 
-        self.set_marker_image(self.json_params["marker_path"])
+        self.set_marker_image(self.__json_params["marker_path"])
 
 
     def set_calib_parameters(self,cam_mat,dist_mat):
-        self.cam_mat = cam_mat
-        self.dist_mat = dist_mat
+        self.__cam_mat = cam_mat
+        self.__dist_mat = dist_mat
 
 
     def set_marker_image(self,path):
-        self.marker_image = cv2.imread(path)
-        self.marker_image = cv2.resize(self.marker_image , (640,480), fx=1.0, fy=1.0)
-        self.marker_kp , self.marker_desc = self.feature_detector.detectAndCompute(self.marker_image,None)
+        self.__marker_image = cv2.imread(path)
+        self.__marker_image = cv2.resize(self.__marker_image, (640, 480), fx=1.0, fy=1.0)
+        self.__marker_kp , self.__marker_desc = self.__feature_detector.detectAndCompute(self.__marker_image, None)
 
 
     def set_input_image(self, input):
         self.in_image = input
-        self.input_kp , self.input_desc = self.feature_detector.detectAndCompute(input,None)
+        self.__input_kp , self.__input_desc = self.__feature_detector.detectAndCompute(input, None)
 
 
     def process_image(self):
-        if (self.json_params["matcher_type"] == "bfm"):
+        if (self.__json_params["matcher_type"] == "bfm"):
             self.run_bf_matcher()
 
-        if (self.json_params["matcher_type"] == "flann"):
+        if (self.__json_params["matcher_type"] == "flann"):
             self.run_flann_matcher()
 
     def run_bf_matcher(self):
         # BFMatcher with default params
         bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=False)
-        matches = bf.knnMatch(self.marker_desc, self.input_desc, k=2)
+        matches = bf.knnMatch(self.__marker_desc, self.__input_desc, k=2)
 
         # Apply ratio test
         good = []
@@ -75,8 +76,8 @@ class NaturalFeatureMarker(MarkerBase):
                 good.append([m])
 
         if len(good) > MIN_MATCH_COUNT:
-            src_pts = np.float32([self.marker_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
-            dst_pts = np.float32([self.input_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+            src_pts = np.float32([self.__marker_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+            dst_pts = np.float32([self.__input_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
 
             H, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
             matchesMask = mask.ravel().tolist()
@@ -85,12 +86,12 @@ class NaturalFeatureMarker(MarkerBase):
             pts = np.float32([[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]).reshape(-1, 1, 2)
             dst = cv2.perspectiveTransform(pts, H)
 
-            num, self.r_vec, self.t_vec, Ns = cv2.decomposeHomographyMat(H,self.cam_mat)
+            num, self.r_vec, self.t_vec, Ns = cv2.decomposeHomographyMat(H, self.__cam_mat)
 
-            if (self.json_params["debug_draw"] == True):
+            if (self.__json_params["debug_draw"] == True):
 
-                aruco.drawAxis(self.in_image, self.cam_mat, self.dist_mat, self.r_vec[0], self.t_vec[0],
-                               0.1)  # Draw Axis
+                aruco.drawAxis(self.in_image, self.__cam_mat, self.__dist_mat, self.r_vec[0], self.t_vec[0],
+                               0.05)  # Draw Axis
                 self.in_image = cv2.polylines(self.in_image, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
 
 
@@ -103,7 +104,7 @@ class NaturalFeatureMarker(MarkerBase):
         search_params = dict(checks=50)  # or pass empty dictionary
         flann = cv2.FlannBasedMatcher(index_params, search_params)
 
-        matches = flann.knnMatch(np.asarray(self.marker_desc,np.float32), np.asarray(self.input_desc,np.float32), k=2)
+        matches = flann.knnMatch(np.asarray(self.__marker_desc, np.float32), np.asarray(self.__input_desc, np.float32), k=2)
         # Need to draw only good matches, so create a mask
         matchesMask = [[0, 0] for i in range(len(matches))]
 
@@ -114,8 +115,8 @@ class NaturalFeatureMarker(MarkerBase):
                 good.append(m)
 
         if len(good) > MIN_MATCH_COUNT:
-            src_pts = np.float32([self.marker_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
-            dst_pts = np.float32([self.input_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+            src_pts = np.float32([self.__marker_kp[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+            dst_pts = np.float32([self.__input_kp[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
 
             H, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
 
@@ -125,26 +126,21 @@ class NaturalFeatureMarker(MarkerBase):
             pts = np.float32([[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]).reshape(-1, 1, 2)
             dst = cv2.perspectiveTransform(pts, H)
 
-            num, self.r_vec, self.t_vec, Ns = cv2.decomposeHomographyMat(H,self.cam_mat)
+            num, self.r_vec, self.t_vec, Ns = cv2.decomposeHomographyMat(H, self.__cam_mat)
+            print(self.__in_image.shape)
 
-            if (self.json_params["debug_draw"] == True):
+            if (self.__json_params["debug_draw"] == True):
 
-                aruco.drawAxis(self.in_image, self.cam_mat, self.dist_mat, self.r_vec[1], self.t_vec[1],
+                aruco.drawAxis(self.in_image, self.__cam_mat, self.__dist_mat, self.r_vec[1], self.t_vec[1],
                                0.1)  # Draw Axis
                 self.in_image = cv2.polylines(self.in_image, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
 
 
-        else:
-            matchesMask = None
-
-
-
-
     def get_output_image(self):
-        return self.in_image
+        return self.__in_image
 
     def get_pose(self):
-        return self.t_vec, self.r_vec
+        return self.__t_vec, self.__r_vec
 
 
 if __name__ == "__main__":
