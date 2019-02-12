@@ -20,6 +20,7 @@ class ArucoMarker(MarkerBase):
 
         self.r_vec = None
         self.t_vec = None
+        self.corner_pnts = None
 
 
     def set_json_parameters(self,params):
@@ -33,17 +34,17 @@ class ArucoMarker(MarkerBase):
         gray = cv2.cvtColor(self.in_image, cv2.COLOR_BGR2GRAY)
 
         # lists of ids and the corners beloning to each id
-        corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, self.aruco_dict, parameters=self.parameters)
+        self.corner_pnts, ids, rejectedImgPoints = aruco.detectMarkers(gray, self.aruco_dict, parameters=self.parameters)
 
         if np.all(ids != None):
 
             # Estimate pose of each marker and return the values rvet and tvec-different from camera coefficients
-            self.r_vec, self.t_vec, _ = aruco.estimatePoseSingleMarkers(corners[0], 0.05, self.cam_mat,
+            self.r_vec, self.t_vec, _ = aruco.estimatePoseSingleMarkers(self.corner_pnts[0], 0.05, self.cam_mat,
                                                             self.dist_mat)
 
             if(self.json_params["debug_draw"] == True ):
                 aruco.drawAxis(self.in_image,  self.cam_mat, self.dist_mat,  self.r_vec[0], self.t_vec[0], 0.1)  # Draw Axis
-                aruco.drawDetectedMarkers(self.in_image, corners)  # Draw A square around the markers
+                aruco.drawDetectedMarkers(self.in_image, self.corner_pnts)  # Draw A square around the markers
 
                 cv2.putText(self.in_image, "Id: " + str(ids), (0, 64), cv2.FONT_HERSHEY_SIMPLEX
                             , 1, (0, 255, 0), 2, cv2.LINE_AA)
@@ -57,6 +58,9 @@ class ArucoMarker(MarkerBase):
 
     def get_pose(self):
         return self.t_vec , self.r_vec
+
+    def get_corners(self):
+        return self.corner_pnts
 
 if __name__ == "__main__":
     marker = ArucoMarker()

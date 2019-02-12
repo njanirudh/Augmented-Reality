@@ -6,8 +6,8 @@ class CameraCalibration:
     """
 
     def __init__(self):
-        self.camera_matrix = None
-        self.dist_matrix = None
+        self.__camera_matrix = None
+        self.__dist_matrix = None
 
     def calibrate_camera(self,path):
         """
@@ -29,11 +29,11 @@ class CameraCalibration:
 
         # note we also have to specify the type to retrieve other wise we only get a
         # FileNode object back instead of a matrix
-        self.camera_matrix = cv_file.getNode("camera_matrix").mat()
-        self.dist_matrix = cv_file.getNode("dist_coeff").mat()
+        self.__camera_matrix = cv_file.getNode("camera_matrix").mat()
+        self.__dist_matrix = cv_file.getNode("dist_coeff").mat()
 
-        print("camera_matrix : ", self.camera_matrix.tolist())
-        print("dist_matrix : ", self.dist_matrix.tolist())
+        print("camera_matrix : ", self.__camera_matrix.tolist())
+        print("dist_matrix : ", self.__dist_matrix.tolist())
 
         cv_file.release()
 
@@ -42,13 +42,13 @@ class CameraCalibration:
 
         :return:
         """
-        return self.camera_matrix
+        return self.__camera_matrix
 
     def get_dist_mat(self):
         """
 
         :return:
         """
-        return self.dist_matrix
+        return self.__dist_matrix
 
 

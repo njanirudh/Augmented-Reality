@@ -15,10 +15,10 @@ class AugmentedRealityService:
         """
 
         """
-        self.json_reader = JsonReader()
-        self.camera_calib = CameraCalibration()
-        self.camera = cv2.VideoCapture(0)
-        self.marker_obj = None
+        self.__json_reader = JsonReader()
+        self.__camera_calib = CameraCalibration()
+        self.__camera = cv2.VideoCapture(0)
+        self.__marker_obj = None
 
 
     def set_service_parameter_json(self,path):
@@ -27,12 +27,12 @@ class AugmentedRealityService:
         :param path:
         :return:
         """
-        self.json_reader.read_from_file(path)
+        self.__json_reader.read_from_file(path)
 
-        calib_path = self.json_reader.get_value("calibration_path")
-        self.camera_calib.get_calibration_from_file(calib_path)
+        calib_path = self.__json_reader.get_value("calibration_path")
+        self.__camera_calib.get_calibration_from_file(calib_path)
 
-        marker_type = self.json_reader.get_value("marker_type")
+        marker_type = self.__json_reader.get_value("marker_type")
         self.set_marker(marker_type)
 
 
@@ -43,18 +43,17 @@ class AugmentedRealityService:
         :return:
         """
 
-        marker_params = self.json_reader.get_value("marker_params")
+        marker_params = self.__json_reader.get_value("marker_params")
 
         if (type == "aruco"):
-            self.marker_obj = ArucoMarker()
+            self.__marker_obj = ArucoMarker()
 
         if (type == "nft"):
-            self.marker_obj = NaturalFeatureMarker()
+            self.__marker_obj = NaturalFeatureMarker()
 
-        self.marker_obj.set_json_parameters(marker_params)
-        self.marker_obj.set_calib_parameters(self.camera_calib.camera_matrix,
-                                             self.camera_calib.dist_matrix)
-
+        self.__marker_obj.set_json_parameters(marker_params)
+        self.__marker_obj.set_calib_parameters(self.__camera_calib.__camera_matrix,
+                                               self.__camera_calib.__dist_matrix)
 
 
     def process_image(self, frame):
@@ -63,9 +62,9 @@ class AugmentedRealityService:
         :param frame:
         :return:
         """
-        self.marker_obj.set_input_image(frame)
-        self.marker_obj.process_image()
-        self.marker_obj.get_pose()
+        self.__marker_obj.set_input_image(frame)
+        self.__marker_obj.process_image()
+        self.__marker_obj.get_pose()
 
 
     def run_service(self):
@@ -73,11 +72,11 @@ class AugmentedRealityService:
 
         :return:
         """
-        if not self.camera.isOpened():
+        if not self.__camera.isOpened():
             raise IOError("Cannot open webcam !")
 
         while True:
-            ret, frame = self.camera.read()
+            ret, frame = self.__camera.read()
 
             self.process_image(frame)
             output = self.get_output()
@@ -93,5 +92,5 @@ class AugmentedRealityService:
 
         :return:
         """
-        return self.marker_obj.get_output_image()
+        return self.__marker_obj.get_output_image()
 
