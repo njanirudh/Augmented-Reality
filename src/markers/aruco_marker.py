@@ -35,7 +35,7 @@ class ArucoMarker(MarkerBase):
     def process_image(self):
         gray = cv2.cvtColor(self.__in_image, cv2.COLOR_BGR2GRAY)
 
-        # lists of ids and the corners beloning to each id
+        # lists of ids and the corners belonging to each id
         self.__corner_pnts, ids, rejectedImgPoints = aruco.detectMarkers(gray, self.__aruco_dict, parameters=self.__parameters)
 
         if np.all(ids != None):
