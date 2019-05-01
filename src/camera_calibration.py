@@ -27,7 +27,7 @@ class CameraCalibration:
         # FILE_STORAGE_READ
         cv_file = cv2.FileStorage(path, cv2.FILE_STORAGE_READ)
 
-        # note we also have to specify the type to retrieve other wise we only get a
+        # Note :: We also have to specify the type to retrieve other wise we only get a
         # FileNode object back instead of a matrix
         self.__camera_matrix = cv_file.getNode("camera_matrix").mat()
         self.__dist_matrix = cv_file.getNode("dist_coeff").mat()

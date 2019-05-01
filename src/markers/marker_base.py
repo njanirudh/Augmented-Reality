@@ -13,7 +13,7 @@ class MarkerBase(ABC):
         """
         Set everytime for new webcam frame
         :param input:
-        :return:
+        :return: None
         """
         pass
 
@@ -22,8 +22,8 @@ class MarkerBase(ABC):
         """
         Parameters for the markers are set
         Parameters are different for different markers
-        :param params:
-        :return:
+        :param params: path to parameters
+        :return: None
         """
         pass
 
@@ -31,9 +31,9 @@ class MarkerBase(ABC):
     def set_calib_parameters(self,cam_mat,dist_mat):
         """
         Setting Calibration parameters for finding the pose
-        :param cam_mat:
-        :param dist_mat:
-        :return:
+        :param cam_mat: Camera matrix
+        :param dist_mat: Distorsion matrix
+        :return: None
         """
         pass
 
@@ -41,7 +41,7 @@ class MarkerBase(ABC):
     def process_image(self):
         """
         Function called for each frame
-        :return:
+        :return: Processed image frame
         """
         pass
 
@@ -50,7 +50,7 @@ class MarkerBase(ABC):
         """
         Get output image with detected
         marker and axis
-        :return:
+        :return: Processed image frame
         """
         pass
 
@@ -59,6 +59,6 @@ class MarkerBase(ABC):
         """
         Returns the transformation matrix
         and rotation matrix
-        :return:
+        :return: Returns both Translation matrix and Rotation matrix
         """
         pass
