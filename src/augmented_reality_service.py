@@ -7,14 +7,16 @@ from src.threaded_webcam import WebcamVideoStream
 
 import cv2
 
-
 class AugmentedRealityService:
     """
+    Main class that performs initializing the input source,
+    finding the marker and placing the object using the obtained
+    pose of the marker.
     """
 
     def __init__(self):
         """
-
+        Initializes the various class required to run the augmented reality service.
         """
         self.__json_reader = JsonReader()
         self.__camera_calib = CameraCalibration()
@@ -25,8 +27,8 @@ class AugmentedRealityService:
     def set_service_parameter_json(self,path):
         """
         Sets the json file path and read the required value
-        :param path:
-        :return:
+        :param path: Path to the configuration JSON file
+        :return: None
         """
         self.__json_reader.read_from_file(path)
 
@@ -40,8 +42,8 @@ class AugmentedRealityService:
     def set_marker(self,type):
         """
         Creates a marker object depending on the json input
-        :param type:
-        :return:
+        :param type: Marker type string
+        :return: None
         """
 
         marker_params = self.__json_reader.get_value("marker_params")
@@ -59,9 +61,9 @@ class AugmentedRealityService:
 
     def process_image(self, frame):
         """
-        Function that runs to process each frame.
-        :param frame:
-        :return:
+        Function that runs to process each frame and then sets the pose.
+        :param frame: Current frame to be processed
+        :return: None
         """
         self.__marker_obj.set_input_image(frame)
         self.__marker_obj.process_image()
@@ -70,7 +72,7 @@ class AugmentedRealityService:
 
     def run_service(self):
         """
-
+        Takes frame from the source, processes the frame and shows it.
         :return:
         """
         if not self.__camera.isOpened():
@@ -91,8 +93,8 @@ class AugmentedRealityService:
 
     def get_output(self):
         """
-
-        :return:
+        Returns the image with the debug markings.
+        :return: Output image from the service.
         """
         return self.__marker_obj.get_output_image()
 
