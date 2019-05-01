@@ -10,8 +10,11 @@ import cv2
 class WebcamVideoStream:
 
     def __init__(self, src=0):
-        # initialize the video camera stream and read the first frame
-        # from the stream
+        """
+        Initialize the video camera stream and read the first frame
+        from the stream.
+        """
+
         self.stream = cv2.VideoCapture(src)
         (self.grabbed, self.frame) = self.stream.read()
 
@@ -20,15 +23,25 @@ class WebcamVideoStream:
         self.stopped = False
 
     def start(self):
-        # start the thread to read frames from the video stream
+        """
+        Start the thread to read frames from the video stream
+        :return: Returns the object instance
+        """
         Thread(target=self.update, args=()).start()
         return self
 
     def isOpened(self):
+        """
+        Checks if the camera stream is opened or not.
+        :return: Boolean
+        """
         return self.stream.isOpened()
 
     def update(self):
-        # keep looping infinitely until the thread is stopped
+        """
+        Keep looping infinitely until the thread is stopped.
+        :return: None
+        """
         while True:
             # if the thread indicator variable is set, stop the thread
             if self.stopped:
@@ -38,11 +51,17 @@ class WebcamVideoStream:
             (self.grabbed, self.frame) = self.stream.read()
 
     def read(self):
-        # return the frame most recently read
+        """
+        Return the frame most recently read.
+        :return: Returns the current frame from the camera
+        """
         return self.frame
 
     def stop(self):
-        # indicate that the thread should be stopped
+        """
+        Indicate that the thread should be stopped.
+        :return: None
+        """
         self.stopped = True
 
 if __name__ == "__main__":

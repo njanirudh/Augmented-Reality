@@ -39,7 +39,6 @@ class CameraCalibration:
 
     def get_camera_mat(self):
         """
-
         :return:
         """
         return self.__camera_matrix

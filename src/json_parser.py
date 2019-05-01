@@ -21,6 +21,9 @@ class JsonReader(Singleton):
 
 
     def print_json(self):
+        """
+        :return: None
+        """
         pprint(self.__json_data)
 
     def get_value(self,key):

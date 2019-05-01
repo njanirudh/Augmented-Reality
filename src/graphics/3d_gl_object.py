@@ -7,6 +7,7 @@ from OpenGL.GLU import *
 def main():
     pygame.init()
     pygame.display.set_mode((600,600), DOUBLEBUF|OPENGL)
+
 main()
 
 img = pygame.image.load('/home/anirudh/NJ/Github/Augmented-Reality/assets/stones.jpg')
@@ -39,7 +40,7 @@ while True:
             pygame.quit()
 
     glLoadIdentity()
-    gluPerspective(45, 1, 0.05, 100)
+    gluPerspective(45, 1, 0.05, 50)
     glTranslatef(0,0,-5)
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 

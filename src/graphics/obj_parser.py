@@ -47,7 +47,7 @@ def GLMainLoop(im):
             if event.type == pygame.QUIT:
                 pygame.quit()
 
-            # convert image to OpenGL texture format
+        # convert image to OpenGL texture format
         #tx_image = cv2.flip(webcam.read(), 0)
         tx_image = webcam.read()
 
