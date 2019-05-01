@@ -3,7 +3,7 @@
 
 class Singleton(object):
     """
-
+    Singleton class 
     """
     _instance = None
     def __new__(class_, *args, **kwargs):

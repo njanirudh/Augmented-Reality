@@ -64,7 +64,7 @@ def GLMainLoop(im):
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ix, iy, 0, GL_RGBA, GL_UNSIGNED_BYTE, tx_image)
 
         glLoadIdentity()
-        gluPerspective(45, 1, 0.05, 100)
+        #gluPerspective(45, 1, 0.05, 100)
         glTranslatef(0, 0, -5)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 

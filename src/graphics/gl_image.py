@@ -3,7 +3,6 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-
 def main():
     pygame.init()
     pygame.display.set_mode((600,600), DOUBLEBUF|OPENGL)
@@ -21,7 +20,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData)
 glEnable(GL_TEXTURE_2D)
 
-def wall(image):
+def wall():
     glBegin(GL_QUADS)
     glTexCoord2f(0,0)
     glVertex3f(-4,-4,-16)
@@ -43,7 +42,7 @@ while True:
     glTranslatef(0,0,-5)
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-    wall(im)
+    wall()
 
     pygame.display.flip()
     pygame.time.wait(50)
