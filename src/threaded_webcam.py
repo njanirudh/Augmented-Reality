@@ -1,5 +1,11 @@
+"""
+Webcam code taken from PyImageSearch
+https://www.pyimagesearch.com/2015/12/21/increasing-webcam-fps-with-python-and-opencv/
+"""
+
 from threading import Thread
 import cv2
+
 
 class WebcamVideoStream:
 
