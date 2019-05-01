@@ -3,6 +3,7 @@ from src.camera_calibration import CameraCalibration
 
 from src.markers.aruco_marker import ArucoMarker
 from src.markers.natural_feature_marker import NaturalFeatureMarker
+from src.threaded_webcam import WebcamVideoStream
 
 import cv2
 
@@ -17,7 +18,7 @@ class AugmentedRealityService:
         """
         self.__json_reader = JsonReader()
         self.__camera_calib = CameraCalibration()
-        self.__camera = cv2.VideoCapture(0)
+        self.__camera = WebcamVideoStream().start()
         self.__marker_obj = None
 
 
@@ -76,7 +77,7 @@ class AugmentedRealityService:
             raise IOError("Cannot open webcam !")
 
         while True:
-            ret, frame = self.__camera.read()
+            frame = self.__camera.read()
 
             self.process_image(frame)
             output = self.get_output()
@@ -85,6 +86,7 @@ class AugmentedRealityService:
 
             c = cv2.waitKey(30)
             if c == 27:
+                self.__camera.stop()
                 break
 
     def get_output(self):

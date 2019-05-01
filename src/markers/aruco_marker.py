@@ -39,14 +39,14 @@ class ArucoMarker(MarkerBase):
         self.__corner_pnts, ids, rejectedImgPoints = aruco.detectMarkers(gray, self.__aruco_dict, parameters=self.__parameters)
 
         if np.all(ids != None):
-            for i in range(len(ids) - 1):
+            for i in range(len(ids)):
             # Estimate pose of each marker and return the values rvet and tvec-different from camera coefficients
                 self.__r_vec, self.__t_vec, _ = aruco.estimatePoseSingleMarkers(self.__corner_pnts[i], 0.05, self.__cam_mat,
                                                                             self.__dist_mat)
 
                 if(self.__json_params["debug_draw"] == True):
 
-                    aruco.drawAxis(self.__in_image, self.__cam_mat, self.__dist_mat, self.__r_vec[0], self.__t_vec[0], 0.1)  # Draw Axis
+                    aruco.drawAxis(self.__in_image, self.__cam_mat, self.__dist_mat, self.__r_vec[0], self.__t_vec[0], 0.05)  # Draw Axis
                     aruco.drawDetectedMarkers(self.__in_image, self.__corner_pnts)  # Draw A square around the markers
 
             cv2.putText(self.__in_image, "Id: " + str(ids), (0, 64), cv2.FONT_HERSHEY_SIMPLEX

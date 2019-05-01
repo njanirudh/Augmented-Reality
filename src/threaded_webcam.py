@@ -24,6 +24,9 @@ class WebcamVideoStream:
         Thread(target=self.update, args=()).start()
         return self
 
+    def isOpened(self):
+        return self.stream.isOpened()
+
     def update(self):
         # keep looping infinitely until the thread is stopped
         while True:
