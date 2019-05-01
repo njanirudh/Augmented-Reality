@@ -1,11 +1,11 @@
 import cv2
 import numpy as np
 
+#(https://stackoverflow.com/questions/3712049/how-to-use-an-opencv-rotation-and-translation-vector-with-opengl-es-in-android)
 def convert_tx_rx_into_transformation(tx,rx):
     """
     Converts the transformation and rotation matrix into
     OpenGL transformation matrix.
-    (https://stackoverflow.com/questions/3712049/how-to-use-an-opencv-rotation-and-translation-vector-with-opengl-es-in-android)
     :param tx: Translation vector
     :param rx: Rotation vector
     :return: Transformation matrix for OpenGL (4 x 4)

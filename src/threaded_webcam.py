@@ -6,7 +6,6 @@ https://www.pyimagesearch.com/2015/12/21/increasing-webcam-fps-with-python-and-o
 from threading import Thread
 import cv2
 
-
 class WebcamVideoStream:
 
     def __init__(self, src=0):

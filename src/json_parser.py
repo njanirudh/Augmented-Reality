@@ -22,10 +22,16 @@ class JsonReader(Singleton):
 
     def print_json(self):
         """
+        Pretty prints the data.
         :return: None
         """
         pprint(self.__json_data)
 
     def get_value(self,key):
+        """
+        Returns value for given key in the json
+        :param key: Key as string in the json
+        :return: Value for the given key
+        """
         return self.__json_data[key]
 

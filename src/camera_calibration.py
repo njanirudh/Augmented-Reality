@@ -11,17 +11,17 @@ class CameraCalibration:
 
     def calibrate_camera(self,path):
         """
-
-        :param path:
-        :return:
+        Code to calibrate the camera given a list of images for calibration.
+        :param path: Path to the calibration images
+        :return: None
         """
         pass
 
     def get_calibration_from_file(self,path):
         """
-
-        :param path:
-        :return:
+        Extract the calibration values from the path.
+        :param path: Path to calibration file
+        :return: None
         """
 
         # FILE_STORAGE_READ
@@ -39,14 +39,15 @@ class CameraCalibration:
 
     def get_camera_mat(self):
         """
-        :return:
+        Returns the camera matrix
+        :return: Returns the camera matrix
         """
         return self.__camera_matrix
 
     def get_dist_mat(self):
         """
-
-        :return:
+        Returns the distorsion matrix
+        :return: Returns the distorsion matrix
         """
         return self.__dist_matrix
 
