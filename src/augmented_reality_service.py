@@ -9,9 +9,8 @@ import cv2
 
 class AugmentedRealityService:
     """
-    Main class that performs initializing the input source,
-    finding the marker and placing the object using the obtained
-    pose of the marker.
+    Class to initialize the input source,finding the marker
+    and placing the object using the obtained pose of the marker.
     """
 
     def __init__(self):
