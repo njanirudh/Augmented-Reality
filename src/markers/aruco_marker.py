@@ -7,7 +7,6 @@ from src.markers.marker_base import MarkerBase
 
 class ArucoMarker(MarkerBase):
 
-
     def __init__(self):
         super().__init__()
 
