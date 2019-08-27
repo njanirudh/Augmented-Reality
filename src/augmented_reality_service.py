@@ -75,7 +75,7 @@ class AugmentedRealityService:
         :return:
         """
         if not self.__camera.isOpened():
-            raise IOError("Cannot open webcam !")
+            raise IOError("Cannot open webcam!")
 
         while True:
             frame = self.__camera.read()
