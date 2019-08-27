@@ -1,6 +1,5 @@
 from src.augmented_reality_service import AugmentedRealityService
 
-
 if __name__ == "__main__":
 
     # Starting AR Service
