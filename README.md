@@ -28,7 +28,7 @@ Depending on the JSON parameters the application will be able to detect 'Aruco' 
 
 ### Input JSON  
 
-There are two seperate types of JSON depending on the type of marker that is tracked.
+There are two seperate types of JSON depending on the type of marker tracked.
 The default parameter JSON files are placed in the data folder.
 
 The paths to the calibration file and marker can be changed  
