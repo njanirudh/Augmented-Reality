@@ -2,11 +2,8 @@
 
 # Augmented-Reality
 
-Augmented reality application using OpenCV and OpenGL in python. Aim of this project is to make a modular AR framework using python which works on wide variety of markers and on which we can place wide variety of graphical elements.
-
-## Introduction
-
-Augmented Reality is a view of of the physical, real world environment that is augmented by synthetic computer-generated elements.
+This repository contains a prototype Augmented reality application using OpenCV and OpenGL python. Aim of this project is to make a modular AR framework using python which works on wide variety of markers and on which we can place wide variety of graphical elements.
+The application takes a <config>.json file as an input and uses that to find apropriate type of marker.  
 
 ## Installation / Usage
 
